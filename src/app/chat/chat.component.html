@@ -1,0 +1,18 @@
+<div class="main-container">
+  <div class="messages-container">
+    <app-message *ngFor="let message of messages$ | async"
+                 [user]="message.user"
+                 [text]="message.text"
+                 [time]="message.date"
+                 [isSelfMessage]="message.user === user"
+                 (onDelete)="handlerDeleteMessage(message, $event)"></app-message>
+  </div>
+  <div class="input-container">
+    <mat-form-field class="full-width">
+      <textarea matInput placeholder="New message" #textMessage (keydown)="onKeyDown($event, textMessage)"></textarea>
+      <button mat-icon-button *ngIf="textMessage.value" matSuffix aria-label="Clear" (click)="sendMessage(textMessage)">
+        <mat-icon>send</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+</div>
