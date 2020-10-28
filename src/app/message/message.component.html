@@ -1,0 +1,18 @@
+<div class="message-box-holder">
+  <div *ngIf="!isSelfMessage" class="message-sender">
+    {{user}}
+  </div>
+  <div class="message-box" [class.message-partner]="!isSelfMessage">
+    {{text}}
+    <div class="date" >
+      <button mat-icon-button [matMenuTriggerFor]="deleteMenu">
+        <mat-icon>delete</mat-icon>
+      </button>
+      {{time.format('L LT')}}
+    </div>
+    <mat-menu #deleteMenu="matMenu">
+      <button mat-menu-item (click)="handleDelete(false)">удалить у меня</button>
+      <button mat-menu-item (click)="handleDelete(true)">удалить у всех</button>
+    </mat-menu>
+  </div>
+</div>
